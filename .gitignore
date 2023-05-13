@@ -4,4 +4,6 @@ dist
 .output
 .nuxt
 .env
-.idea/
+.nitro
+.DS_Store
+.idea
