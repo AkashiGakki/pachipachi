@@ -1,5 +1,9 @@
-import { pwa } from './config/pwa'
 import { appDescription } from './constants/index'
+
+const isDev = process.env.NODE_ENV === 'development'
+
+const apiBaseUrl = 'http://localhost:3001'
+// const apiBaseUrl = 'https://pachipachi-proxy.vercel.app'
 
 export default defineNuxtConfig({
   modules: [
@@ -7,7 +11,8 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
-    '@vite-pwa/nuxt',
+    '@nuxt/image-edge',
+    '@nuxtjs/i18n',
   ],
 
   experimental: {
@@ -16,6 +21,16 @@ export default defineNuxtConfig({
     payloadExtraction: false,
     inlineSSRStyles: false,
     renderJsonPayloads: true,
+  },
+
+  routeRules: {
+    '/**': isDev ? {} : { cache: { swr: true, maxAge: 120, staleMaxAge: 60, headersOnly: true } },
+  },
+
+  runtimeConfig: {
+    public: {
+      apiBaseUrl,
+    },
   },
 
   css: [
@@ -55,9 +70,40 @@ export default defineNuxtConfig({
     },
   },
 
-  pwa,
-
   devtools: {
     enabled: true,
+  },
+
+  image: {
+    provider: 'proxy',
+    providers: {
+      proxy: {
+        provider: 'ipx',
+        options: {
+          baseURL: `${apiBaseUrl}/ipx`,
+        },
+      },
+    },
+  },
+
+  i18n: {
+    detectBrowserLanguage: {
+      useCookie: false,
+      fallbackLocale: 'en',
+    },
+    strategy: 'no_prefix',
+    locales: [
+      {
+        code: 'en',
+        file: 'en.json',
+      },
+      {
+        code: 'zh-CN',
+        file: 'zh-CN.json',
+      },
+    ],
+    lazy: true,
+    langDir: 'internationalization',
+    defaultLocale: 'en',
   },
 })
