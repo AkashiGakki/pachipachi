@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { appName } from '~/constants'
+import { appName } from '~/constants/app'
 import '@unocss/reset/tailwind.css'
 
 useHead({
@@ -11,9 +11,8 @@ useHead({
 </script>
 
 <template>
-  <VitePwaManifest />
-
   <NuxtLayout>
+    <NuxtLoadingIndicator color="yellow-light" />
     <NuxtPage />
   </NuxtLayout>
 </template>

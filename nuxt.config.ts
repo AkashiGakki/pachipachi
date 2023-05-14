@@ -1,4 +1,4 @@
-import { appDescription } from './constants/index'
+import { appDescription } from './constants/app'
 
 const isDev = process.env.NODE_ENV === 'development'
 
