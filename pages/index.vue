@@ -4,11 +4,9 @@ const online = useOnline()
 
 <template>
   <div>
-    <Logos mb-6 />
-
     <Suspense>
       <ClientOnly>
-        <PageView v-if="online" />
+        <FrontPage v-if="online" />
 
         <div v-else text-gray:80>
           You're offline
