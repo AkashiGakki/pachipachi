@@ -3,8 +3,9 @@ import { LRUCache } from 'lru-cache'
 import { hash as ohash } from 'ohash'
 import type { Credits, Media, MediaType, PageResult, Person } from '../types'
 
-const apiBaseUrl = 'http://localhost:3001'
+// const apiBaseUrl = 'http://localhost:3001'
 // const apiBaseUrl = 'https://pashipashi-proxy.vercel.app'
+const apiBaseUrl = 'https://movies-proxy.vercel.app'
 
 const cache = new LRUCache<string, any>({
   max: 500,
@@ -59,12 +60,10 @@ export function getTvShowEpisodes(id: string, season: string) {
   return fetchTMDB(`tv/${id}/season/${season}`)
 }
 
-
 // Get trending
 export function getTrending(media: string, page = 1) {
   return fetchTMDB(`trending/${media}/week`, { page })
 }
-
 
 // Discover media by genre
 export function getMediaByGenre(media: string, genre: string, page = 1): Promise<PageResult<Media>> {

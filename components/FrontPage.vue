@@ -11,8 +11,10 @@ const queries = computed(() => [
 ])
 
 const AsyncWrapper = defineComponent(async (_, ctx) => {
-  const list = await listMedia(type.value, queries.value[0].query, 1)
-  const item = await getMedia(type.value, list.results[0].id)
+  // const list = await listMedia(type.value, queries.value[0].query, 1)
+  // const item = await getMedia(type.value, list.results[0].id)
+
+  const item = await getMedia(type.value, '635302') // 鬼灭之刃 无限列车
   return () => ctx.slots?.default?.({ item })
 })
 </script>

@@ -29,4 +29,9 @@ html.dark {
   background: #222;
   color: white;
 }
+
+html.light {
+  background: white;
+  color: #222;
+}
 </style>

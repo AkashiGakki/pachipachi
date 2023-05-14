@@ -15,6 +15,7 @@ export default defineEventHandler(async (event) => {
     },
   )
   const config = useRuntimeConfig()
+
   if (!config.tmdb.apiKey)
     throw new Error('TMDB API key is not set')
   try {
